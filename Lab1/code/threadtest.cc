@@ -12,7 +12,7 @@
 #include "copyright.h"
 #include "system.h"
 #include <ctime>
-#include "dlist.h"
+#include "dllist.h"
 
 // 增加 extern
 extern void InsertItem(int which, DLList *list, int key);
@@ -45,30 +45,30 @@ getName(int i)
 {
     switch (i)
     {
-    case 0:
-        return "forked thread 0";
-    case 1:
-        return "forked thread 1";
-    case 2:
-        return "forked thread 2";
-    case 3:
-        return "forked thread 3";
-    case 4:
-        return "forked thread 4";
-    case 5:
-        return "forked thread 5";
-    case 6:
-        return "forked thread 6";
-    case 7:
-        return "forked thread 7";
-    case 8:
-        return "forked thread 8";
-    case 9:
-        return "forked thread 9";
-    case 10:
-        return "forked thread 10";
-    default:
-        return "forked thread 00";
+        case 0:
+            return "forked thread 0";
+        case 1:
+            return "forked thread 1";
+        case 2:
+            return "forked thread 2";
+        case 3:
+            return "forked thread 3";
+        case 4:
+            return "forked thread 4";
+        case 5:
+            return "forked thread 5";
+        case 6:
+            return "forked thread 6";
+        case 7:
+            return "forked thread 7";
+        case 8:
+            return "forked thread 8";
+        case 9:
+            return "forked thread 9";
+        case 10:
+            return "forked thread 10";
+        default:
+            return "forked thread 00";
     }
 }
 void DllistTest(int witch)
@@ -95,7 +95,7 @@ void DllistTest2(int which)
 
 void DllistTest3(int which)
 { //乱序
-    printf("Thread %d start.\n", which);
+    printf("Thread {%d} start.\n", which);
     if (which == 1)
     {
         InsertItem(which, list, 1);
@@ -103,7 +103,6 @@ void DllistTest3(int which)
         InsertItem(which, list, 0);
         InsertItem(which, list, 5);
         PrintList(which, list); // 此处发生线程切换
-        // 此时转入else(which == 1)的代码
         InsertItem(which, list, 3);
         InsertItem(which, list, 7);
         PrintList(which, list);
@@ -112,7 +111,6 @@ void DllistTest3(int which)
     { // which == 2
         PrintList(which, list);
         InsertItem(which, list, 3);
-        // currentThread->Yield();
         PrintList(which, list);
     }
 }
@@ -137,20 +135,20 @@ void ThreadTest()
     printf("Entering test %d\n", testnum);
     switch (testnum)
     {
-    case 1:
-        toDllistTest(DllistTest);
-        break;
-    case 2: // switch out of function
-        toDllistTest(DllistTest1);
-        break;
-    case 3: // insert to the empty list causing one item coving the other one
-        toDllistTest(DllistTest2);
-        break;
-    case 4: // delete item  at  one time
-        toDllistTest(DllistTest3);
-        break;
-    default:
-        printf("No test specified.\n");
-        break;
+        case 1:
+            toDllistTest(DllistTest);
+            break;
+        case 2: // switch out of function
+            toDllistTest(DllistTest1);
+            break;
+        case 3: // insert to the empty list causing one item coving the other one
+            toDllistTest(DllistTest2);
+            break;
+        case 4: // delete item  at  one time
+            toDllistTest(DllistTest3);
+            break;
+        default:
+            printf("No test specified.\n");
+            break;
     }
 }
