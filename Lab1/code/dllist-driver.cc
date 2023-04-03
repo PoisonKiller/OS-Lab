@@ -1,4 +1,4 @@
-#include "dlist.h"
+#include "dllist.h"
 #include <cstdio>
 #include <iostream>
 #include <ctime>
@@ -6,23 +6,23 @@
 
 using namespace std;
 
-#define NUM_RANGE 100
+#define NUM_RANGE 200
 
 void InsertItem(int which, DLList *list, int key)
 {
-    printf("%d 插入元素 %d \n", which, key);
+    printf("线程{%d} 插入元素 %d \n", which, key);
     list->SortedInsert3(NULL, key);
 }
 
 void RemoveItem(int which, DLList *list, int key)
 {
-    printf("%d 删除了元素 %d \n", which, key);
+    printf("线程{%d} 删除了元素 %d \n", which, key);
     list->SortedRemove(key);
 }
 
 void PrintList(int which, DLList *list)
 {
-    printf("Print List from %d: ", which);
+    printf("打印线程{%d}的list: ", which);
     list->ShowList();
 }
 //在list随机有序的插入n个随机数  两个强制装换的位置不同
@@ -59,7 +59,8 @@ void genItem2List2(DLList *list, int n,int which)
         item = new int;
         *item = rand() % NUM_RANGE;
         key = rand() % NUM_RANGE;
-        cout << "thread:which" << which <<" Insert: key->" << key << endl;
+        printf("threadNo{%d} Insert: key->%d\n", which, key);
+//        cout << "thread:which" << which <<" Insert: key->" << key << endl;
         list->SortedInsert2((void *)item, key); //差别在这
         list->ShowList1();
     }
