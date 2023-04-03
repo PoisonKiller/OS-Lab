@@ -1,6 +1,5 @@
-#include "dlist.h"
+#include "dllist.h"
 #include "system.h"
-
 #include <cstdio>
 
 DLLElement::DLLElement(void *itemPtr, int sortKey)
@@ -250,13 +249,13 @@ void DLList::ShowList1()
         printf("NULL\n");
         return;
     }
-    printf("*");
+    printf("插入后打印: ");
     while (p->next != NULL)
     {
         printf("%d ", p->key);
         p = p->next;
     }
-    printf("%d*\n", p->key); // 最后一个
+    printf("%d\n", p->key); // 最后一个
 }
 // print list 删除时打印
 void DLList::ShowList2()
@@ -267,13 +266,13 @@ void DLList::ShowList2()
         printf("NULL\n");
         return;
     }
-    printf("@");
+    printf("删除后打印: ");
     while (p->next != NULL)
     {
         printf("%d ", p->key);
         p = p->next;
     }
-    printf("%d@\n", p->key); // 最后一个
+    printf("%d\n", p->key); // 最后一个
 }
 // print list 删除时打印
 void DLList::ReverseShowList()
@@ -318,9 +317,4 @@ int DLList::FoundKey(int n)
         p = p->next;
     }
     return p->key;
-}
-// test
-void DLList::Print()
-{
-    printf("Hello world!\n");
 }
